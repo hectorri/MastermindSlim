@@ -28,8 +28,8 @@ CREATE TABLE `jugada` (
   `id_jugada` int(11) NOT NULL,
   `nombre_partida` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL,
-  `codigo_jugada` varchar(4) COLLATE utf8_spanish_ci NOT NULL,
-  `resultado_jugada` varchar(4) COLLATE utf8_spanish_ci NOT NULL
+  `codigo_jugada` varchar(6) COLLATE utf8_spanish_ci NOT NULL,
+  `resultado_jugada` varchar(6) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE `jugada` (
 CREATE TABLE `partida` (
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `fecha` datetime NOT NULL,
-  `codigo` varchar(4) COLLATE utf8_spanish_ci NOT NULL,
+  `codigo` varchar(6) COLLATE utf8_spanish_ci NOT NULL,
   `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
