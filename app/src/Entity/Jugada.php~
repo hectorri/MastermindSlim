@@ -1,0 +1,55 @@
+<?php
+
+
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Jugada
+ *
+ * @ORM\Table(name="jugada")
+ * @ORM\Entity
+ */
+class Jugada
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_jugada", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idJugada;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre_partida", type="string", length=100, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $nombrePartida;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo_jugada", type="string", length=6, nullable=false)
+     */
+    private $codigoJugada;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="resultado_jugada", type="string", length=6, nullable=false)
+     */
+    private $resultadoJugada;
+
+
+}
