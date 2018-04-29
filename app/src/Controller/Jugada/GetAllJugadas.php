@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Partida;
+namespace App\Controller\Jugada;
 
 use App\Controller\BaseController;
 use Slim\Http\Request;
