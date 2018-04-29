@@ -2,7 +2,6 @@
 
 namespace App\Controller\Partida;
 
-use App\Controller\BaseController;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Container;
@@ -26,6 +25,7 @@ class CreatePartida extends BasePartida
     $this->setParams($request, $response, $args);
     $input = $this->getInput();
     $result = $this->getPartidaResource()->createPartida($input);
-    return $this->jsonResponse('success', $result, 201);
+
+    return $this->jsonResponse('success', $result, 201);   
   }
 }
