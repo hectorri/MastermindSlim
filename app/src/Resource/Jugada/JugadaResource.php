@@ -18,8 +18,22 @@ class JugadaResource extends BaseResource
 
   public function getJugadas()
   {
-    $partidas = $this->getEntityManager()->getRepository('App\Entity\Jugada')->findAll();
+    $jugadas = $this->getEntityManager()->getRepository('App\Entity\Jugada')->findAll();
+    $jugadas = array_map(function($jugada) {
+      return $this->convertToArray($jugada); },
+      $jugadas);
 
-    return $partidas;
+    return $jugadas;
   }
+
+
+	private function convertToArray(Jugada $jugada) {
+		return array(
+			'idJugada' => $jugada->getIdJugada(),
+      'nombrePartida'  => $jugada->getNombrePartida(),
+      'fecha' => $jugada->getFecha(),
+			'codigoJugada' => $jugada->getCodigoJugada(),
+			'resultado' => $jugada->getResultadoJugada()
+		);
+	}
 }
