@@ -7,6 +7,7 @@ $app->get('/status', 'App\Controller\DefaultController:getStatus');
 $app->group('/api/v1', function () use ($app) {
   $app->group('/partidas', function () use ($app) {
     $app->get('', 'App\Controller\Partida\GetAllPartidas');
+    $app->post('','App\Controller\Partida\CreatePartida');
   });
   $app->group('/jugadas', function () use ($app) {
     $app->get('', 'App\Controller\Jugada\GetAllJugadas');

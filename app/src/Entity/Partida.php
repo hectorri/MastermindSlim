@@ -42,7 +42,17 @@ class Partida
      */
     private $estado;
 
-
+    /**
+     * Set nombre.
+     *
+     * @param string $nombre
+     * @return Partida
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+        return $this;
+    }
 
     /**
      * Get nombre.
