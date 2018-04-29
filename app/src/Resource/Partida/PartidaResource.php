@@ -45,7 +45,7 @@ class PartidaResource extends BaseResource
   {
     $partida = new Partida();
     if ($data != null) {
-      $partida->setNombre($data['nombrePartida']);
+      $partida->setNombre($data['nombre']);
       if ($this->checkPartida($partida) == null) {
         if ($data['fecha'] == null) {
           $data['fecha'] = date('d/m/Y');
