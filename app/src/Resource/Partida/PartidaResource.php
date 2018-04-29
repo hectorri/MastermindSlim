@@ -43,13 +43,13 @@ class PartidaResource extends BaseResource
   */
   public function createPartida($data)
   {
-    //$codigoPartida = $this->generateRandomCodigo();
-    
+    $codigoPartida = $this->generateRandomCodigo();
     $partida = new Partida();
+
     if ($data != null) {
-      $partida->setNombre($data['nombre']);
+      $partida->setNombre($data['nombre']);     
       $partida->setFecha(DateTime::createFromFormat('d/m/Y', date('d/m/Y')));
-      $partida->setCodigo('ABDCDE');
+      $partida->setCodigo($codigoPartida);
       $partida->setEstado(1);
      // if ($this->existPartida($nombrePartida) == 'OK'){
         $this->getEntityManager()->persist($partida);
