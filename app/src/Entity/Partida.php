@@ -43,6 +43,12 @@ class Partida
     private $estado;
 
 
+  public function setNombre($nombre)
+  {
+    $this->nombre = $nombre;
+
+    return $this;
+  }
 
     /**
      * Get nombre.
@@ -125,4 +131,13 @@ class Partida
     {
         return $this->estado;
     }
+
+  public function toArray() {
+    return array(
+      'nombre' => $this->getNombre(),
+      'fecha'  => $this->getFecha(),
+      'codigo' => $this->getCodigo(),
+      'estado' => $this->getEstado()
+    );
+  }
 }

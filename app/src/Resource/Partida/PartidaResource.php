@@ -19,7 +19,7 @@ class PartidaResource extends BaseResource
   public function getPartidas()
   {
     $partidas = $this->getEntityManager()->getRepository('App\Entity\Partida')->findAll();
-	$partidas = array_map(function($partida) {
+	  $partidas = array_map(function($partida) {
                 return $this->convertToArray($partida); },
                 $partidas);
     return $partidas;
@@ -27,11 +27,13 @@ class PartidaResource extends BaseResource
 
 
 	private function convertToArray(Partida $partida) {
-		return array(
+    $array = (array) $partida;
+    return $array;
+		/*return array(
 			'nombre' => $partida->getNombre(),
 			'fecha'  => $partida->getFecha(),
 			'codigo' => $partida->getCodigo(),
 			'estado' => $partida->getEstado()
-		);
+		);*/
 	}
 }	

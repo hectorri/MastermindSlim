@@ -2,18 +2,16 @@
 
 namespace App\Controller\Jugada;
 
-use App\Controller\BaseController;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Container;
 
 /**
- * Get All Jugadas Controller.
+ * Create Jugada Controller.
  */
-class GetAllJugadas extends BaseJugada
+class CreateJugada extends BaseJugada
 {
-  /**
-     * Get all Jugadas.
+    /**
+     * Create a jugada.
      *
      * @param Request $request
      * @param Response $response
@@ -23,8 +21,9 @@ class GetAllJugadas extends BaseJugada
     public function __invoke($request, $response, $args)
     {
         $this->setParams($request, $response, $args);
-        $result = $this->getJugadaResource()->getJugadas();
+        $input = $this->getInput();
+        $result = $this->getJugadaResource()->createJugada($input);
 
-        return $this->jsonResponse('success', $result, 200);
+        return $this->jsonResponse('success', $result, 201);
     }
 }
