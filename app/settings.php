@@ -2,6 +2,9 @@
 
 return [
   'settings' => [
+    'debug' => true,
+    'displayErrorDetails' => true,
+
     'logger' => [
       'enabled' => true,
       'name' => 'mastermindslim',
