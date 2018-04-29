@@ -26,6 +26,10 @@ class JugadaResource extends BaseResource
     return $jugadas;
   }
 
+    public function deleteJugada($nombre){
+        $response = $this->getEntityManager()->getRepository('App\Entity\Jugada')->delete($nombre);
+        return $response;
+    }
 
 	private function convertToArray(Jugada $jugada) {
 		return array(

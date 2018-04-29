@@ -10,6 +10,7 @@ $app->group('/api/v1', function () use ($app) {
   });
   $app->group('/jugadas', function () use ($app) {
     $app->get('', 'App\Controller\Jugada\GetAllJugadas');
+	$app->delete('/[{nombre}]', 'App\Controller\Jugada\DeleteJugada');
   });
     /*
         $app->group('/tasks', function () use ($app) {
