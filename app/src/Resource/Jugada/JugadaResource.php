@@ -21,10 +21,16 @@ class JugadaResource extends BaseResource
   {
     $jugadas = $this->getEntityManager()->getRepository('App\Entity\Jugada')->findAll();
     $jugadas = array_map(function($jugada) {
-               return $this->convertToArray($jugada); },
-               $jugadas);
+      return $this->convertToArray($jugada); },
+      $jugadas);
+
     return $jugadas;
   }
+
+    public function deleteJugada($nombre){
+        $response = $this->getEntityManager()->getRepository('App\Entity\Jugada')->delete($nombre);
+        return $response;
+    }
 
 	private function convertToArray(Jugada $jugada) {
 		return array(
