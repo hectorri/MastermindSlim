@@ -2,6 +2,7 @@
 
 namespace App\Resource\Partida;
 
+use \DateTime;
 use App\Entity\Partida;
 use App\Resource\BaseResource;
 use Slim\Container;
@@ -42,32 +43,31 @@ class PartidaResource extends BaseResource
   */
   public function createPartida($data)
   {
-    //$codigoPartida = $this->generateRandomCodigo();
-    //$nombrePartida = '';
-    //if ($data != null) {
-     // $nombrePartida = $data['nombre'];
-      
-      $partida->setNombre("NombrePARTIDA");
-      $partida->setFecha(DateTime::createFromFormat('d/m/Y', date('d/m/Y')));
-      $partida->setCodigo('ABDCDE');
-      $partida->setEstado(1);
-     // if ($this->existPartida($nombrePartida) == 'OK'){
+    $partida = new Partida();
+    if ($data != null) {
+      $partida->setNombre($data['nombrePartida']);
+      if ($this->checkPartida($partida) == null) {
+        if ($data['fecha'] == null) {
+          $data['fecha'] = date('d/m/Y');
+        }
+        $partida->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
+        if ($data['codigo'] == null) {
+          $data['codigo'] = $this->generateRandomCodigo();
+        }
+        $partida->setCodigo($data['codigo']);
+        $partida->setEstado(1);
         $this->getEntityManager()->persist($partida);
         $this->getEntityManager()->flush();
-  
-      //}
-    //}
+      }
+      $partida = $this->checkPartida($partida);
+    }
     return $partida;
   }
 
-  public function existPartida($nombrePartida)
+  public function checkPartida($partida)
   {
-    $partida = $this->getEntityManager()->getRepository('App\Entity\Partida')->find($nombrePartida);
-    $insert = 'OK';
-    if ($partida != null) {     
-        $insert = 'KO';
-    }
-    return $insert;
+    $partida = $this->getEntityManager()->getRepository('App\Entity\Partida')->find($partida->getNombre());
+    return $partida;
   }
 
   /* Genera el código inicial de la partida */

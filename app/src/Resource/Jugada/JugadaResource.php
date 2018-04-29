@@ -48,15 +48,16 @@ class JugadaResource extends BaseResource
     if ($data != null) {
       $jugada->setIdJugada($data['idJugada']);
       $jugada->setNombrePartida($data['nombrePartida']);
-      if ($data['fecha'] == null) {
-        $data['fecha'] = date('d/m/Y');
+      if ($this->checkJugada($jugada) == null) {
+        if ($data['fecha'] == null) {
+          $data['fecha'] = date('d/m/Y');
+        }
+        $jugada->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
+        $jugada->setCodigoJugada($data['codigoJugada']);
+        $jugada->setResultadoJugada($this->calcularResultado($jugada->getNombrePartida(), $jugada->getCodigoJugada()));
+        $this->getEntityManager()->persist($jugada);
+        $this->getEntityManager()->flush();
       }
-      $jugada->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
-      $jugada->setCodigoJugada($data['codigoJugada']);
-      $jugada->setResultadoJugada($this->calcularResultado($jugada->getNombrePartida(), $jugada->getCodigoJugada()));
-      $this->getEntityManager()->persist($jugada);
-      $this->getEntityManager()->flush();
-
       $jugada = $this->checkJugada($jugada);
     }
     return $jugada;

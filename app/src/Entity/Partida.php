@@ -17,7 +17,7 @@ class Partida
      *
      * @ORM\Column(name="nombre", type="string", length=100, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $nombre;
 
@@ -51,6 +51,7 @@ class Partida
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
+
         return $this;
     }
 
