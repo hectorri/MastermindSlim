@@ -10,7 +10,7 @@ use Slim\Container;
 /**
  * Delete Jugada Controller.
  */
-class DeleteJugada extends BaseController {
+class DeleteJugada extends BaseJugada {
 
 	protected $jugadaResource;
 
@@ -27,10 +27,14 @@ class DeleteJugada extends BaseController {
 
     public function __invoke($request, $response, $args){
 
-        $this->setParams($request, $response, $args);
-        $nombre = $this->args['nombre'];
-        $result = $this->getJugadaResource()->deleteJugada($nombre);
-
-        return $this->jsonResponse('success', $result, 200);
+	    $this->setParams($request, $response, $args);
+      //$input = $this->getInput();
+      $idJugada = $this->args['idJugada'];
+      $nombrePartida = $this->args['nombrePartida'];
+      $result = $this->getJugadaResource()->deleteJugada($idJugada, $nombrePartida);
+      if ($result == null) {
+        return $this->jsonResponse('error', $result, 404);
+      }
+      return $this->jsonResponse('success', $result, 200);
     }
 }

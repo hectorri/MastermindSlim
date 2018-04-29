@@ -27,11 +27,6 @@ class JugadaResource extends BaseResource
     return $jugadas;
   }
 
-    public function deleteJugada($nombre){
-        $response = $this->getEntityManager()->getRepository('App\Entity\Jugada')->delete($nombre);
-        return $response;
-    }
-
 	private function convertToArray(Jugada $jugada) {
 		return array(
 			'idJugada' => $jugada->getIdJugada(),
@@ -41,6 +36,20 @@ class JugadaResource extends BaseResource
 			'resultado' => $jugada->getResultadoJugada()
 		);
 	}
+
+  public function deleteJugada($idJugada, $nombrePartida){
+    $jugada = new Jugada();
+    if ($idJugada != null && $nombrePartida != null) {
+      $jugada->setIdJugada($idJugada);
+      $jugada->setNombrePartida($nombrePartida);
+      $jugada = $this->checkJugada($jugada);
+      if ($jugada != null) {
+        $this->getEntityManager()->remove($jugada);
+        $this->getEntityManager()->flush();
+      }
+    }
+    return $jugada;
+  }
 
   public function createJugada($data)
   {
