@@ -63,7 +63,8 @@ class PartidaResource extends BaseResource
     }
     return $partida;
   }
-
+  
+  /* Comprueba si la partida existe */
   public function checkPartida($partida)
   {
     $partida = $this->getEntityManager()->getRepository('App\Entity\Partida')->find($partida->getNombre());
@@ -79,5 +80,24 @@ class PartidaResource extends BaseResource
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+  }
+
+  /**
+   * Actualiza el estado de la partida
+   */
+  public function updatePartida($nombre, $estado)
+  {
+      $partida = new Partida();     
+
+      if ($nombre != null && $estado!= null) {
+        $partida->setNombre($nombre); 
+        $partida = $this->checkPartida($partida);
+        if ($partida != null) {
+          $partida->setEstado($estado);          
+          $this->getEntityManager()->merge($partida);
+          $this->getEntityManager()->flush();
+        }
+      }
+      return $partida;
   }
 }	
