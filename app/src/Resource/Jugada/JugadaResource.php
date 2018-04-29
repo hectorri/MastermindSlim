@@ -54,8 +54,8 @@ class JugadaResource extends BaseResource
       $jugada->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
       $jugada->setCodigoJugada($data['codigoJugada']);
       $jugada->setResultadoJugada($this->calcularResultado($jugada->getNombrePartida(), $jugada->getCodigoJugada()));
-      //$this->getEntityManager()->persist($jugada);
-      //$this->getEntityManager()->flush();
+      $this->getEntityManager()->persist($jugada);
+      $this->getEntityManager()->flush();
 
       $jugada = $this->checkJugada($jugada);
     }
