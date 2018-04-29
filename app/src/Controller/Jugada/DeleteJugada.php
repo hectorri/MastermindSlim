@@ -33,7 +33,8 @@ class DeleteJugada extends BaseJugada {
       $nombrePartida = $this->args['nombrePartida'];
       $result = $this->getJugadaResource()->deleteJugada($idJugada, $nombrePartida);
       if ($result == null) {
-        return $this->jsonResponse('error', $result, 404);
+        $params = array('message' => 'Jugada no encontrada', 'idJugada' => $idJugada, 'nombrePartida' => $nombrePartida);
+        return $this->jsonResponse('error', $params, 404);
       }
       return $this->jsonResponse('success', $result, 200);
     }
