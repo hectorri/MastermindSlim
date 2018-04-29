@@ -43,7 +43,8 @@ abstract class BaseResource
     $path = array('app/src/Entity');
     $devMode = true;
 
-    $config = Setup::createAnnotationMetadataConfiguration($path, $devMode);
+    $config = Setup::createAnnotationMetadataConfiguration($path, $devMode,
+      null, null, false);
 
     $connectionOptions = array(
       'driver'   => 'pdo_mysql',

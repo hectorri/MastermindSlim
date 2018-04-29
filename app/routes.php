@@ -8,6 +8,9 @@ $app->group('/api/v1', function () use ($app) {
   $app->group('/partidas', function () use ($app) {
     $app->get('', 'App\Controller\Partida\GetAllPartidas');
   });
+  $app->group('/jugadas', function () use ($app) {
+    $app->get('', 'App\Controller\Jugada\GetAllJugadas');
+  });
     /*
         $app->group('/tasks', function () use ($app) {
             $app->get('', 'App\Controller\Task\GetAllTasks');
