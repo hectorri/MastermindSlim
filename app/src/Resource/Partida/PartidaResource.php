@@ -2,6 +2,7 @@
 
 namespace App\Resource\Partida;
 
+use \DateTime;
 use App\Entity\Partida;
 use App\Resource\BaseResource;
 use Slim\Container;
@@ -43,11 +44,10 @@ class PartidaResource extends BaseResource
   public function createPartida($data)
   {
     //$codigoPartida = $this->generateRandomCodigo();
-    //$nombrePartida = '';
-    //if ($data != null) {
-     // $nombrePartida = $data['nombre'];
-      
-      $partida->setNombre("NombrePARTIDA");
+    
+    $partida = new Partida();
+    if ($data != null) {
+      $partida->setNombre($data['nombre']);
       $partida->setFecha(DateTime::createFromFormat('d/m/Y', date('d/m/Y')));
       $partida->setCodigo('ABDCDE');
       $partida->setEstado(1);
@@ -56,7 +56,7 @@ class PartidaResource extends BaseResource
         $this->getEntityManager()->flush();
   
       //}
-    //}
+    }
     return $partida;
   }
 
