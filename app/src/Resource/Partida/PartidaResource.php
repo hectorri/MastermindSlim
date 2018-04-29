@@ -37,22 +37,37 @@ class PartidaResource extends BaseResource
 
   /* Create partida
   *
-  *  @param array|object|null $input
+  *  @param array|object|null $data
   *  @return object
   */
   public function createPartida($data)
   {
-    $codigoJugada = $this->generateRandomCodigo();
+    //$codigoPartida = $this->generateRandomCodigo();
+    //$nombrePartida = '';
+    //if ($data != null) {
+     // $nombrePartida = $data['nombre'];
+      
+      $partida->setNombre("NombrePARTIDA");
+      $partida->setFecha(DateTime::createFromFormat('d/m/Y', date('d/m/Y')));
+      $partida->setCodigo('ABDCDE');
+      $partida->setEstado(1);
+     // if ($this->existPartida($nombrePartida) == 'OK'){
+        $this->getEntityManager()->persist($partida);
+        $this->getEntityManager()->flush();
+  
+      //}
+    //}
+    return $partida;
+  }
 
-    date_default_timezone_set('UTC');
-
-    $partida = new Partida();
-    $partida->setNombre("PROBANDO"/*$data("nombre")*/);
-    $partida->setFecha(date('d/m/Y'));//FechaActual
-    $partida->setCodigo($codigoJugada);
-    $this->getEntityManager()->persist($partida);
-
-    return (json_encode($partida));
+  public function existPartida($nombrePartida)
+  {
+    $partida = $this->getEntityManager()->getRepository('App\Entity\Partida')->find($nombrePartida);
+    $insert = 'OK';
+    if ($partida != null) {     
+        $insert = 'KO';
+    }
+    return $insert;
   }
 
   /* Genera el código inicial de la partida */

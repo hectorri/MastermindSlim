@@ -10,23 +10,8 @@ use Slim\Container;
 /**
  * Get All Partidas Controller.
  */
-class GetAllPartidas extends BaseController
+class GetAllPartidas extends BasePartida
 {
-  protected $partidaResource;
-
-  /**
-   * @param Container $container
-   */
-  public function __construct(Container $container)
-  {
-    $this->logger = $container->get('logger');
-    $this->partidaResource = $container->get('partida_resource');
-  }
-
-  protected function getPartidaResource()
-  {
-    return $this->partidaResource;
-  }
 
   /**
      * Get all Partidas.

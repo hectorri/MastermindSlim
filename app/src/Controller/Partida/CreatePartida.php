@@ -10,32 +10,9 @@ use Slim\Container;
 /**
  * Create Partida Controller.
  */
-class CreatePartida extends BaseController
+class CreatePartida extends BasePartida
 {
-  protected $partidaResource;
-
-  /**
-   * @param Container $container
-   */
-  public function __construct(Container $container)
-  {
-    $this->logger = $container->get('logger');
-    $this->partidaResource = $container->get('partida_resource');
-  }
-
-  protected function getPartidaResource()
-  {
-    return $this->partidaResource;
-  }
-
-  /**
-  * @return array
-  */
-  protected function getInput()
-  {
-    return $this->request->getParsedBody();
-  }
-
+  
   /**
   * Create Partida.
   *
