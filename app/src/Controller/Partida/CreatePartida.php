@@ -26,6 +26,9 @@ class CreatePartida extends BasePartida
     $input = $this->getInput();
     $result = $this->getPartidaResource()->createPartida($input);
 
-    return $this->jsonResponse('success', $result, 201);   
+    if ($result == null) {
+      return $this->jsonResponse('error', $result, 404);
+    }
+    return $this->jsonResponse('success', $result, 201);
   }
 }

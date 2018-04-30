@@ -25,7 +25,6 @@ class GetAllPartidas extends BasePartida
     {
         $this->setParams($request, $response, $args);
         $result = $this->getPartidaResource()->getPartidas();
-      //$this->logger->info("getPartidas = " . $result);
 
         return $this->jsonResponse('success', $result, 200);
     }
