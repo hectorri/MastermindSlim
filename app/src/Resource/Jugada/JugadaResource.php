@@ -27,6 +27,16 @@ class JugadaResource extends BaseResource
     return $jugadas;
   }
 
+  public function getJugadasPartida($nombrePartida)
+  {
+	$params = array('nombrePartida' => $nombrePartida);
+    $jugadas = $this->getEntityManager()->getRepository('App\Entity\Jugada')->findBy($params);
+    $jugadas = array_map(function($jugada) {
+      return $this->convertToArray($jugada); },
+      $jugadas);
+
+    return $jugadas;
+  }
 	private function convertToArray(Jugada $jugada) {
 		return array(
 			'idJugada' => $jugada->getIdJugada(),

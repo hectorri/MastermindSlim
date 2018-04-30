@@ -12,6 +12,7 @@ $app->group('/api/v1', function () use ($app) {
   });
   $app->group('/jugadas', function () use ($app) {
     $app->get('', 'App\Controller\Jugada\GetAllJugadas');
+	$app->get('/jugadasPartida/[{nombrePartida}]', 'App\Controller\Jugada\GetJugadasPartida');
 	  $app->delete('/[{idJugada}/{nombrePartida}]', 'App\Controller\Jugada\DeleteJugada');
     $app->post('', 'App\Controller\Jugada\CreateJugada');
   });
