@@ -49,24 +49,26 @@ class JugadaResource extends BaseResource
         $this->getEntityManager()->flush();
       }
     }
-    return $this->convertToArray($jugada);
+    return $jugada;
   }
 
   public function createJugada($data)
   {
     $jugada = new Jugada();
+    //Se valida si hay datos
     if ($data != null) {
       $jugada->setIdJugada($data['idJugada']);
       $jugada->setNombrePartida($data['nombrePartida']);
       if ($this->checkJugada($jugada) == null) {
-        if ($data['fecha'] == null) {
+        if (empty($data['fecha']) || $data['fecha'] == null) {
           $data['fecha'] = date('d/m/Y');
         }
         $jugada->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
-        if ($data['codigoJugada'] == null) {
+        if (empty($data['codigoJugada']) || $data['codigoJugada'] == null) {
           $data['codigoJugada'] = '';
         }
         $jugada->setCodigoJugada($data['codigoJugada']);
+        //Se evalua la jugada
         $jugada->setResultadoJugada($this->calcularResultado($jugada->getNombrePartida(), $jugada->getCodigoJugada()));
         $this->getEntityManager()->persist($jugada);
         $this->getEntityManager()->flush();

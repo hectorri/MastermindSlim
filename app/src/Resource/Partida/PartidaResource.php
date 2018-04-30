@@ -37,11 +37,11 @@ class PartidaResource extends BaseResource
     if ($data != null) {
       $partida->setNombre($data['nombre']);
       if ($this->checkPartida($partida) == null) {
-        if ($data['fecha'] == null) {
+        if (empty($data['fecha']) || $data['fecha'] == null) {
           $data['fecha'] = date('d/m/Y');
         }
         $partida->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
-        if ($data['codigo'] == null) {
+        if (empty($data['codigo']) || $data['codigo'] == null) {
           $data['codigo'] = $this->generateRandomCodigo();
         }
         $partida->setCodigo($data['codigo']);
@@ -98,5 +98,4 @@ class PartidaResource extends BaseResource
       'estado' => $partida->getEstado()
     );
   }
-
 }
