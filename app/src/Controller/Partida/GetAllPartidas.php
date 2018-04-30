@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller\Partida;
 
 use App\Controller\BaseController;
@@ -8,24 +7,23 @@ use Slim\Http\Response;
 use Slim\Container;
 
 /**
- * Get All Partidas Controller.
+ * Representa el controlador que obtiene las partidas almacenadas
  */
-class GetAllPartidas extends BasePartida
-{
+class GetAllPartidas extends BasePartida {
 
-  /**
-     * Get all Partidas.
-     *
-     * @param Request $request
-     * @param Response $response
-     * @param array $args
-     * @return Response
-     */
-    public function __invoke($request, $response, $args)
-    {
-        $this->setParams($request, $response, $args);
-        $result = $this->getPartidaResource()->getPartidas();
-
-        return $this->jsonResponse('success', $result, 200);
-    }
+	/**
+	 * Obtiene todas las partidas
+	 *
+	 * @param Request $request
+	 * @param Response $response
+	 * @param array $args
+	 * @return Response
+	 */
+	public function __invoke($request, $response, $args) {
+		$this->setParams($request, $response, $args);
+		//Obtenemos las partidas
+		$result = $this->getPartidaResource()->getPartidas();
+		//Devolvemos las partidas
+		return $this->jsonResponse('success', $result, 200);
+	}
 }
