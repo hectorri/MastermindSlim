@@ -26,16 +26,6 @@ class PartidaResource extends BaseResource
     return $partidas;
   }
 
-
-	private function convertToArray(Partida $partida) {
-		return array(
-			'nombre' => $partida->getNombre(),
-			'fecha'  => $partida->getFecha(),
-			'codigo' => $partida->getCodigo(),
-			'estado' => $partida->getEstado()
-		);
-  }
-
   /* Create partida
   *
   *  @param array|object|null $data
@@ -61,7 +51,7 @@ class PartidaResource extends BaseResource
       }
       $partida = $this->checkPartida($partida);
     }
-    return $partida;
+    return $this->convertToArray($partida);
   }
   
   /* Comprueba si la partida existe */
@@ -85,19 +75,28 @@ class PartidaResource extends BaseResource
   /**
    * Actualiza el estado de la partida
    */
-  public function updatePartida($nombre, $estado)
+  public function updatePartida($data, $nombre)
   {
-      $partida = new Partida();     
-
-      if ($nombre != null && $estado!= null) {
-        $partida->setNombre($nombre); 
-        $partida = $this->checkPartida($partida);
-        if ($partida != null) {
-          $partida->setEstado($estado);          
-          $this->getEntityManager()->merge($partida);
-          $this->getEntityManager()->flush();
-        }
+    $partida = new Partida();
+    $partida->setNombre($nombre);
+    $partida = $this->checkPartida($partida);
+    if ($partida != null) {
+      if ($data != null) {
+        $partida->setEstado($data['estado']);
+        $this->getEntityManager()->merge($partida);
+        $this->getEntityManager()->flush();
       }
-      return $partida;
+    }
+    return $this->convertToArray($partida);
   }
-}	
+
+  private function convertToArray(Partida $partida) {
+    return array(
+      'nombre' => $partida->getNombre(),
+      'fecha'  => $partida->getFecha(),
+      'codigo' => $partida->getCodigo(),
+      'estado' => $partida->getEstado()
+    );
+  }
+
+}

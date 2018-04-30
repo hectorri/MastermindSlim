@@ -24,14 +24,11 @@ class UpdatePartida extends BasePartida
   {
     $this->setParams($request, $response, $args);
     $input = $this->getInput();
-    $nombreLeido = $this->args['nombre'];   
-    $estado = $this->args['estado']; 
-    $this->logger->info("nombreLeido = " . $nombreLeido); 
-    $result = $this->getPartidaResource()->updatePartida($nombreLeido, $estado);
+    $nombreLeido = $this->args['nombre'];
+    //$estado = $this->args['estado'];
+    //$this->logger->info("nombreLeido = " . $nombreLeido);
+    $result = $this->getPartidaResource()->updatePartida($input, $nombreLeido);
 
     return $this->jsonResponse('success', $result, 200);
-
-    //$result = $this->getUserService()->updateUser($input, $this->args['id']);
-  
   }
 }

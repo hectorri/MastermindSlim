@@ -37,15 +37,6 @@ class JugadaResource extends BaseResource
 
     return $jugadas;
   }
-	private function convertToArray(Jugada $jugada) {
-		return array(
-			'idJugada' => $jugada->getIdJugada(),
-      'nombrePartida'  => $jugada->getNombrePartida(),
-      'fecha' => $jugada->getFecha(),
-			'codigoJugada' => $jugada->getCodigoJugada(),
-			'resultado' => $jugada->getResultadoJugada()
-		);
-	}
 
   public function deleteJugada($idJugada, $nombrePartida){
     $jugada = new Jugada();
@@ -58,7 +49,7 @@ class JugadaResource extends BaseResource
         $this->getEntityManager()->flush();
       }
     }
-    return $jugada;
+    return $this->convertToArray($jugada);
   }
 
   public function createJugada($data)
@@ -72,6 +63,9 @@ class JugadaResource extends BaseResource
           $data['fecha'] = date('d/m/Y');
         }
         $jugada->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
+        if ($data['codigoJugada'] == null) {
+          $data['codigoJugada'] = '';
+        }
         $jugada->setCodigoJugada($data['codigoJugada']);
         $jugada->setResultadoJugada($this->calcularResultado($jugada->getNombrePartida(), $jugada->getCodigoJugada()));
         $this->getEntityManager()->persist($jugada);
@@ -79,7 +73,7 @@ class JugadaResource extends BaseResource
       }
       $jugada = $this->checkJugada($jugada);
     }
-    return $jugada;
+    return $this->convertToArray($jugada);
   }
 
   private function calcularResultado($nombrePartida, $codigoJugada)
@@ -100,4 +94,15 @@ class JugadaResource extends BaseResource
     $jugada = $this->getEntityManager()->getRepository('App\Entity\Jugada')->find($params);
     return $jugada;
   }
+
+  private function convertToArray(Jugada $jugada) {
+    return array(
+      'idJugada' => $jugada->getIdJugada(),
+      'nombrePartida'  => $jugada->getNombrePartida(),
+      'fecha' => $jugada->getFecha(),
+      'codigoJugada' => $jugada->getCodigoJugada(),
+      'resultado' => $jugada->getResultadoJugada()
+    );
+  }
+
 }

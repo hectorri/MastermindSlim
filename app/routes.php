@@ -8,11 +8,11 @@ $app->group('/api/v1', function () use ($app) {
   $app->group('/partidas', function () use ($app) {
     $app->get('', 'App\Controller\Partida\GetAllPartidas');
     $app->post('','App\Controller\Partida\CreatePartida');
-    $app->put('/[{nombre}/{estado}]','App\Controller\Partida\UpdatePartida');
+    $app->put('/[{nombre}]','App\Controller\Partida\UpdatePartida');
   });
   $app->group('/jugadas', function () use ($app) {
     $app->get('', 'App\Controller\Jugada\GetAllJugadas');
-	$app->get('/jugadasPartida/[{nombrePartida}]', 'App\Controller\Jugada\GetJugadasPartida');
+	  $app->get('/partida/[{nombrePartida}]', 'App\Controller\Jugada\GetJugadasPartida');
 	  $app->delete('/[{idJugada}/{nombrePartida}]', 'App\Controller\Jugada\DeleteJugada');
     $app->post('', 'App\Controller\Jugada\CreateJugada');
   });

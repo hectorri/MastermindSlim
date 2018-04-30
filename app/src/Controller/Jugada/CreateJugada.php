@@ -24,6 +24,9 @@ class CreateJugada extends BaseJugada
         $input = $this->getInput();
         $result = $this->getJugadaResource()->createJugada($input);
 
+        if ($result == null) {
+          return $this->jsonResponse('error', $result, 404);
+        }
         return $this->jsonResponse('success', $result, 201);
     }
 }
