@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller\Jugada;
 
 use App\Controller\BaseController;
@@ -8,11 +7,10 @@ use Slim\Http\Response;
 use Slim\Container;
 
 /**
- * Get All Jugadas by Partida Controller.
+ * Representa el controlador que obtiene las jugadas de una partida
  */
-class GetJugadasPartida extends BaseJugada
-{
-  /**
+class GetJugadasPartida extends BaseJugada {
+	/**
      * Get all Jugadas by Partida.
      *
      * @param Request $request
@@ -20,12 +18,13 @@ class GetJugadasPartida extends BaseJugada
      * @param array $args
      * @return Response
      */
-    public function __invoke($request, $response, $args)
-    {
+    public function __invoke($request, $response, $args) {
         $this->setParams($request, $response, $args);
+		//Recogemos el nombre de la partida a consultar
 		$nombrePartida = $this->args['nombrePartida'];
+		//Obtenemos las jugadas
         $result = $this->getJugadaResource()->getJugadasPartida($nombrePartida);
-
+		//Devolvemos las jugadas
         return $this->jsonResponse('success', $result, 200);
     }
 }
