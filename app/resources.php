@@ -6,16 +6,15 @@ use \App\Resource\Jugada\JugadaResource;
 $container = $app->getContainer();
 
 /**
- * @return ApiError
-
-$container["errorHandler"] = function() {
-    return new ApiError;
-};*/
-
+ * Acceso a gestor de Partidas
+ */
 $container['partida_resource'] = function($container) {
   return new PartidaResource($container);
 };
 
+/**
+ * Acceso a gestor de Jugadas
+ */
 $container['jugada_resource'] = function($container) {
   return new JugadaResource($container);
 };

@@ -7,7 +7,10 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 /**
- * Default Controller.
+ * Representa el controlador de las funciones básicas de la aplicación:
+ * -getHelp: consultar ayuda
+ * -getVersion: consultar versión desplegada
+ * -getStatus: consultar estado de despliegue
  */
 class DefaultController extends BaseController
 {

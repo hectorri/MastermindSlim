@@ -1,5 +1,5 @@
 <?php
-
+//Configuración de log y parámetros de conexión a base de datos
 return [
   'settings' => [
     'debug' => true,
