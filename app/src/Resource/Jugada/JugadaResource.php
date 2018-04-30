@@ -29,7 +29,7 @@ class JugadaResource extends BaseResource
 
   public function getJugadasPartida($nombrePartida)
   {
-	$params = array('nombrePartida' => $nombrePartida);
+	  $params = array('nombrePartida' => $nombrePartida);
     $jugadas = $this->getEntityManager()->getRepository('App\Entity\Jugada')->findBy($params);
     $jugadas = array_map(function($jugada) {
       return $this->convertToArray($jugada); },
@@ -37,6 +37,7 @@ class JugadaResource extends BaseResource
 
     return $jugadas;
   }
+
 	private function convertToArray(Jugada $jugada) {
 		return array(
 			'idJugada' => $jugada->getIdJugada(),
@@ -64,6 +65,7 @@ class JugadaResource extends BaseResource
   public function createJugada($data)
   {
     $jugada = new Jugada();
+    //Se valida si hay datos 
     if ($data != null) {
       $jugada->setIdJugada($data['idJugada']);
       $jugada->setNombrePartida($data['nombrePartida']);
@@ -73,15 +75,21 @@ class JugadaResource extends BaseResource
         }
         $jugada->setFecha(DateTime::createFromFormat('d/m/Y', $data['fecha']));
         $jugada->setCodigoJugada($data['codigoJugada']);
+        //Se evalua la jugada
         $jugada->setResultadoJugada($this->calcularResultado($jugada->getNombrePartida(), $jugada->getCodigoJugada()));
         $this->getEntityManager()->persist($jugada);
         $this->getEntityManager()->flush();
       }
       $jugada = $this->checkJugada($jugada);
+      //Formateamos el json de la respuesta
+      $jugada= $this->convertToArray($jugada); 
     }
+
+  
     return $jugada;
   }
 
+  /* Metodo que evalua si la jugada es correcta */
   private function calcularResultado($nombrePartida, $codigoJugada)
   {
     $result = 'KO';
