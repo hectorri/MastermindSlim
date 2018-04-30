@@ -7,7 +7,7 @@ use Slim\Http\Response;
 use Monolog\Logger;
 
 /**
- * Base Controller.
+ * Clase que representa la lógica básica de los controladores
  */
 abstract class BaseController
 {
