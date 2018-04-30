@@ -89,7 +89,7 @@ Respuesta:
 
 Petición:
 ```
-$ curl -X PUT http://localhost:8081/api/v1/partidas/partida1/2
+$ curl -X PUT http://localhost:8081/api/v1/partidas/partida1 --data estado=2
 ```
 
 Respuesta:
@@ -105,7 +105,7 @@ Respuesta:
             "timezone": "Europe\/Berlin"
         },
         "codigo": "FFCDFC",
-        "estado": 2
+        "estado": "2"
     }
 }
 ```
